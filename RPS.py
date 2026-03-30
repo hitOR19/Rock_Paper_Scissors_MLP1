@@ -7,7 +7,7 @@ def player(prev_play, opponent_history=[]):
     if len(opponent_history) < 5:
         return "R"
 
-    # -------- Pattern (length 3) --------
+    #  Pattern (length 3) analysis
     pattern = "".join(opponent_history[-3:])
     patterns = {}
 
@@ -23,7 +23,7 @@ def player(prev_play, opponent_history=[]):
     if pattern in patterns:
         predicted = max(set(patterns[pattern]), key=patterns[pattern].count)
 
-    # -------- Recent frequency --------
+    # Recent frequency analysis
     recent = opponent_history[-12:]
     counts = {"R": 0, "P": 0, "S": 0}
 
@@ -32,7 +32,7 @@ def player(prev_play, opponent_history=[]):
 
     freq_pred = max(counts, key=counts.get)
 
-    # 🔥 FINAL FIX: dynamic decision
+    #  FINAL FIX: dynamic decision
     if predicted and patterns[pattern].count(predicted) > 1:
         final_pred = predicted
     else:
